@@ -76,76 +76,47 @@
 <body>
     <div class='myDiv'>
         <br> <br> Button Input:
-        <script type="text/javascript">
+        <script type='text/javascript'>
             var selectedButton = 0;
             document.write('Bouton actif : ' + (selectedButton +1));
         </script>
-            <audio id="audio1" src="AMV - Naruto - Guilty.mp3" autostart="false" ></audio>
-            <audio id="audio2" src="Still Fresh - Une danse (Clip officiel).mp3" autostart="false" ></audio>
-            <audio id="audio3" src="Kamisa Negra - DKR [Cover Booba].mp3" autostart="false" ></audio>
-            <audio id="audio4" src="Still Fresh Ft. Abou Debeing - Je te vois.mp3" autostart="false" ></audio>
-            <audio id="audio5" src="Franglish feat. Dadju & Vegeta - C'est plus l'heure (Clip officiel).mp3" autostart="false" ></audio>
-
         <br> <br>
         <form>
             <table>
-                <tr>                    
-                    <script type='text/javascript'>
-                        var ledTab = [{id: 'l1', on: false},
-                            {id: 'l2', on: false},
-                            {id: 'l3', on: false},
-                            {id: 'l4', on: false},
-                            {id: 'l5', on: false},
-                            {id: 'l6', on: false},
-                            {id: 'l7', on: false},
-                            {id: 'l8', on: false}];
+                <tr>
 
-                        for (var i=0; i < ledTab.length; i++){
-                            var value = null;
-                            var span = "<span id='"+ledTab[i]['id']+"' onclick='selectLed("+(i)+")' name='toggle' value=''>";
-                            if (ledTab[i]['on'] == false) {
-                                value = 'O';
-                            } else {
-                                value = 'X';
-                                span = "<span id='"+ledTab[i]['id']+"' class='disabled' name='toggle' value=''>";
-                            }
-                            document.write("<td>"+span+value+"</span></td>");
-                        }
-                    </script>
+                    <td><span id='l1' onclick='selectLed(0)' name='toggle' value=''>O</span></td>
+                    <td><span id='l2' onclick='selectLed(1)' name='toggle' value=''>O</span></td>
+                    <td><span id='l3' onclick='selectLed(2)' name='toggle' value=''>O</span></td>
+                    <td><span id='l4' onclick='selectLed(3)' name='toggle' value=''>O</span></td>
+                    <td><span id='l5' onclick='selectLed(4)' name='toggle' value=''>O</span></td>
+                    <td><span id='l6' onclick='selectLed(5)' name='toggle' value=''>O</span></td>
+                    <td><span id='l7' onclick='selectLed(6)' name='toggle' value=''>O</span></td>
+                    <td><span id='l8' onclick='selectLed(7)' name='toggle' value=''>O</span></td>
                 </tr>
                 <tr>
-                    <script type="text/javascript">
-                    var tab = [{id: 'b1', led: []},
-                        {id: 'b2', led: []},
-                        {id: 'b3', led: []},
-                        {id: 'b4', led: []},
-                        {id: 'b5', led: []},
-                        {id: 'b6', led: []},
-                        {id: 'b7', led: []},
-                        {id: 'b8', led: []}];
-
-                    for (var i=0; i < tab.length; i++){
-                        var addClass = "class='myButton'";
-                        if(tab[i]['id'] == tab[selectedButton]['id']) {
-                            addClass = "class='myButton active'";
-                        }
-                        document.write("<td><span id='"+tab[i]['id']+"'"+addClass+" onclick='colorActive("+tab[i]['id']+","+i+")'>"+(i+1)+"</span></td>");
-                    }
-                    </script>
+                    <td><span id='b1' class='myButton active' onclick='colorActive(b1, O)'>1</span></td>
+                    <td><span id='b2' class='myButton' onclick='colorActive(b2, 1)'>2</span></td>
+                    <td><span id='b3' class='myButton' onclick='colorActive(b3, 2)'>3</span></td>
+                    <td><span id='b4' class='myButton' onclick='colorActive(b4, 3)'>4</span></td>
+                    <td><span id='b5' class='myButton' onclick='colorActive(b5, 4)'>5</span></td>
+                    <td><span id='b6' class='myButton' onclick='colorActive(b6, 5)'>6</span></td>
+                    <td><span id='b7' class='myButton' onclick='colorActive(b7, 6)'>7</span></td>
+                    <td><span id='b8' class='myButton' onclick='colorActive(b8, 7)'>8</span></td>
                 </tr>
             </table>
         </form>
         <br> No LED changed.
-        <div id="myModal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
+        <div id='myModal' class='modal'>
+          <div class='modal-content'>
+            <span class='close'>&times;</span>
             <p> Choose a color for your LED </p>
-            <form action="">
-                <input type="radio" name="color" value="blue" class="test">
+            <form action=''>
+                <input type='radio' name='color' value='blue' class='test'>
                     <span class='color-cadre' style='background-color: cornflowerblue'> Blue </span> <br>
-                <input type="radio" name="color" value="red" class="test">
+                <input type='radio' name='color' value='red' class='test'>
                     <span class='color-cadre' style='background-color: indianred'> Red </span><br>
-                <input type="radio" name="color" value="green" class="test">
+                <input type='radio' name='color' value='green' class='test'>
                     <span class='color-cadre' style='background-color: forestgreen'> Green </span>
             </form>
           </div>
@@ -153,23 +124,39 @@
         </div>
     </div>
     <script type='text/javascript'>
+        var tab = [{id: 'b1', led: []},
+            {id: 'b2', led: []},
+            {id: 'b3', led: []},
+            {id: 'b4', led: []},
+            {id: 'b5', led: []},
+            {id: 'b6', led: []},
+            {id: 'b7', led: []},
+            {id: 'b8', led: []}];
+        var ledTab = [{id: 'l1', on: false},
+            {id: 'l2', on: false},
+            {id: 'l3', on: true},
+            {id: 'l4', on: false},
+            {id: 'l5', on: false},
+            {id: 'l6', on: false},
+            {id: 'l7', on: false},
+            {id: 'l8', on: false}];
         var modal = document.getElementById('myModal');
-        var span = document.getElementsByClassName("close")[0];
+        var span = document.getElementsByClassName('close')[0];
 
         span.onclick = function() {
-            modal.style.display = "none";
+            modal.style.display = 'none';
         }
 
         window.onclick = function(event) {
             if (event.target == modal) {
-                modal.style.display = "none";
+                modal.style.display = 'none';
             }
         }
 
         function selectLed(id) {
             tab[selectedButton]['led'].push(id); // send the selected LED id to the selected button led table.
             ledTab[id]['on'] = true; // on peut selectionner une LED plusieurs fois, donc ne sert à rien. trouver autre solution pour changer le O to X
-            modal.style.display = "block"; // display block to choose color
+            modal.style.display = 'block'; // display block to choose color
         }
 
         function colorActive(id, nb) {
@@ -180,39 +167,12 @@
             //t.removeClass('active');
             selectedButton = nb; // update selectedButton
             var d = document.getElementById(id.id);
-            d.className += " active"; // add class active to the selected new button
+            d.className += ' active'; // add class active to the selected new button
         }
     </script>
-    <script>
-        var s1 = document.getElementById("audio1"),
-            s2 = document.getElementById("audio2"),
-            s3 = document.getElementById("audio3"),
-            s4 = document.getElementById("audio4"),
-            s5 = document.getElementById("audio5");
-            b1 = document.getElementById("b1"),
-            b2 = document.getElementById("b2"),
-            b3 = document.getElementById("b3"),
-            b4 = document.getElementById("b4"),
-            b5 = document.getElementById("b5");
-
-        function playSound(soundToPlay) {
-            soundToPlay.currentTime = 23;
-            soundToPlay.play();
-        }
-
-        function stopPlayingSound(soundToStop) {
-            soundToStop.pause();
-        }
-        b1.onmousedown = function () { playSound(audio1) };
-        b2.onmousedown = function () { playSound(audio2) };
-        b3.onmousedown = function () { playSound(audio3) };
-        b4.onmousedown = function () { playSound(audio4) };
-        b5.onmousedown = function () { playSound(audio5) };
-        b1.onmouseup = function () { stopPlayingSound(audio1) };
-        b2.onmouseup = function () { stopPlayingSound(audio2) };
-        b3.onmouseup = function () { stopPlayingSound(audio3) };
-        b4.onmouseup = function () { stopPlayingSound(audio4) };
-        b5.onmouseup = function () { stopPlayingSound(audio5) };
-     </script>
 </body>
 </html>
+
+
+<!-- DO NOT REMOVE THIS BACKSLASH-->
+\
