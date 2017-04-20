@@ -203,7 +203,16 @@
         function stopPlayingSound(soundToStop) {
             soundToStop.pause();
         }
-       
+        b1.onmousedown = function () { playSound(audio1) };
+        b2.onmousedown = function () { playSound(audio2) };
+        b3.onmousedown = function () { playSound(audio3) };
+        b4.onmousedown = function () { playSound(audio4) };
+        b5.onmousedown = function () { playSound(audio5) };
+        b1.onmouseup = function () { stopPlayingSound(audio1) };
+        b2.onmouseup = function () { stopPlayingSound(audio2) };
+        b3.onmouseup = function () { stopPlayingSound(audio3) };
+        b4.onmouseup = function () { stopPlayingSound(audio4) };
+        b5.onmouseup = function () { stopPlayingSound(audio5) };
      </script>
 </body>
 </html>
