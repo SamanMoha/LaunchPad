@@ -195,7 +195,15 @@
             b4 = document.getElementById("b4"),
             b5 = document.getElementById("b5");
 
-        
+        function playSound(soundToPlay) {
+            soundToPlay.currentTime = 23;
+            soundToPlay.play();
+        }
+
+        function stopPlayingSound(soundToStop) {
+            soundToStop.pause();
+        }
+       
      </script>
 </body>
 </html>
