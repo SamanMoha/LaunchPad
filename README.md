@@ -1,5 +1,7 @@
 # LaunchPad
 
+A simple LaunchPad with an Arduino (Wemos D1 mini) , 8 buttons , 8 LED ws2812 and one  resistor .
+
 ### Setup environment
 
 1. Start Arduino IDE
@@ -19,3 +21,10 @@
 1. Open `Sketch` -> `Include Library` -> `Manage Libraries...`
 2. Install [`WiFiManager`][wifi_manager]
 3. Install `Adafruit NeoPixel`
+
+#### Scheme
+
+1. Setup all the buttons on your board and link one side to the ground , the other to your board . If you are using the Wemos D1 mini , be careful , you can't plug your LED to the D0 Pin , so use it for your button , and the this PIN is an INPUT_PULLDOWN , so you have to link it to your alimentation using the resistor. If you do that , you can use all the buttons as INPUT_PULLUP .
+2. Then link your LED (to the Pin D0 if your are on the Wemos D1 mini) and to the 5V output .
+3. Now your board is setup :)
+(nb : the D4 Pin is linked to the internal LED on the Wemos D1 mini , so when you will press this button the LED will light up)
