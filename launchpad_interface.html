@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+        td {
+            text-align: center;
+            font-size: 60px;
+            padding-right: 10px;
+        }
+        span {
+            cursor: pointer;
+        }
+        .myDiv {
+            height: 100%;
+            width: 50%;
+            margin-left: 30%;
+            font-size: x-large;
+        }
+        .myButton {
+            background-color: lightgray;
+            font-size: x-large;
+            border-radius: 2px;
+            box-shadow: 2px 2px 2px 1px $grey;
+            padding: 10px;
+        }
+        .active {
+            background-color: lightcoral;
+        }
+        .disabled {
+            cursor: not-allowed;
+            color: gray;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .color-cadre {
+            color: white;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 2px;
+        }
+        .test {
+            margin: 30px;
+        }
+    </style>
+    <title> IoT into </title>
+</head>
+<body>
+    <div class='myDiv'>
+        <br> <br> Button Input:
+        <script type="text/javascript">
+            var selectedButton = 0;
+            document.write('Bouton actif : ' + (selectedButton +1));
+        </script>
+        <br> <br>
+        <form>
+            <table>
+                <tr>
+                    <script type='text/javascript'>
+                        var ledTab = [{id: 'l1', on: false},
+                            {id: 'l2', on: false},
+                            {id: 'l3', on: false},
+                            {id: 'l4', on: false},
+                            {id: 'l5', on: false},
+                            {id: 'l6', on: false},
+                            {id: 'l7', on: false},
+                            {id: 'l8', on: false}];
+
+                        for (var i=0; i < ledTab.length; i++){
+                            var value = null;
+                            var span = "<span id='"+ledTab[i]['id']+"' onclick='selectLed("+(i)+")' name='toggle' value=''>";
+                            if (ledTab[i]['on'] == false) {
+                                value = 'O';
+                            } else {
+                                value = 'X';
+                                span = "<span id='"+ledTab[i]['id']+"' class='disabled' name='toggle' value=''>";
+                            }
+                            document.write("<td>"+span+value+"</span></td>");
+                        }
+                    </script>
+                </tr>
+                <tr>
+                    <script type="text/javascript">
+                    var tab = [{id: 'b1', led: []},
+                        {id: 'b2', led: []},
+                        {id: 'b3', led: []},
+                        {id: 'b4', led: []},
+                        {id: 'b5', led: []},
+                        {id: 'b6', led: []},
+                        {id: 'b7', led: []},
+                        {id: 'b8', led: []}];
+
+                    for (var i=0; i < tab.length; i++){
+                        var addClass = "class='myButton'";
+                        if(tab[i]['id'] == tab[selectedButton]['id']) {
+                            addClass = "class='myButton active'";
+                        }
+                        document.write("<td><span id='"+tab[i]['id']+"'"+addClass+" onclick='colorActive("+tab[i]['id']+","+i+")'>"+(i+1)+"</span></td>");
+                    }
+                    </script>
+                </tr>
+            </table>
+        </form>
+        <br> No LED changed.
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p> Choose a color for your LED </p>
+            <form action="">
+                <input type="radio" name="color" value="blue" class="test">
+                    <span class='color-cadre' style='background-color: cornflowerblue'> Blue </span> <br>
+                <input type="radio" name="color" value="red" class="test">
+                    <span class='color-cadre' style='background-color: indianred'> Red </span><br>
+                <input type="radio" name="color" value="green" class="test">
+                    <span class='color-cadre' style='background-color: forestgreen'> Green </span>
+            </form>
+          </div>
+
+        </div>
+    </div>
+    <script type='text/javascript'>
+        var modal = document.getElementById('myModal');
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function selectLed(id) {
+            tab[selectedButton]['led'].push(id); // send the selected LED id to the selected button led table.
+            ledTab[id]['on'] = true; // on peut selectionner une LED plusieurs fois, donc ne sert à rien. trouver autre solution pour changer le O to X
+            modal.style.display = "block"; // display block to choose color
+        }
+
+        function colorActive(id, nb) {
+            //selectedButton = document.getElementsByClassName('active');
+            //$(e).removeClass('active');
+            //.removeClass('active');
+            //var t = document.getElementById(selectedButton);
+            //t.removeClass('active');
+            selectedButton = nb; // update selectedButton
+            var d = document.getElementById(id.id);
+            d.className += " active"; // add class active to the selected new button
+        }
+    </script>
+</body>
+</html>
