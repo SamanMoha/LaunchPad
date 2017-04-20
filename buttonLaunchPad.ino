@@ -38,7 +38,7 @@ void setup() {
 #endif
 
   Serial.begin(115200);
-Serial.println();
+  Serial.println();
   for (int i = 0; i < SIZE ; i++) {
     pinMode(buttonPin[i], INPUT_PULLUP);
     Serial.println(i);
@@ -67,171 +67,140 @@ void loop() {
   for (int i = 0; i < SIZE ; i++) {
     buttonState[i] = digitalRead(buttonPin[i]);
     if (buttonState[i] == LOW) {
-      lightItUp();
-      
-//      Serial.printf("%d button %d \n", buttonState[i], i);
+      lightItUp(i);
     }
   }
-  //rainbow(20);
-  //Serial.printf("%d button \n", button1State);
-  //Serial.printf("%d buttonState \n",buttonState);
-  //If button pressed...
 
+  if (buttonState[0] == HIGH &&
+      buttonState[1] == HIGH &&
+      buttonState[2] == HIGH &&
+      buttonState[3] == HIGH &&
+      buttonState[4] == HIGH &&
+      buttonState[5] == HIGH &&
+      buttonState[6] == HIGH &&
+      buttonState[7] == HIGH ) {
 
-  //  if (buttonState[0] == LOW) {
-  //    //lightItUp();
-  //    Serial.printf("%d button 1 \n", button1State);
-  //  }
-  //  if (button2State == LOW) {
-  //    // lightItUp2();
-  //    Serial.printf("%d button 2 \n", button2State);
-  //  }
-  //  if (button3State == LOW) {
-  //    //colorWipe(strip.Color(0, 0, 255), 50); // Blue
-  //    Serial.printf("%d button 3 \n", button3State);
-  //    //      strip.setPixelColor(2, strip.Color(0, 0, 127));
-  //    //      strip.show();
-  //  }
-  //  if (button4State == LOW) {
-  //    Serial.printf("%d button 4 \n", button4State);
-  //    // lightItUp();
-  //  }
-  //  if (button5State == LOW) {
-  //    Serial.printf("%d button 5 \n", button5State);
-  //    // lightItUp();
-  //  }
-  //  if (button6State == LOW) {
-  //    Serial.printf("%d button 6 \n", button6State);
-  //    // lightItUp2();
-  //  }
-  //  if (button7State == LOW) {
-  //    Serial.printf("%d button 7 \n", button7State);
-  //    // lightItUp();
-  //  }
-  //  } else if (button1State == HIGH &&
-  //             button2State == LOW &&
-  //             button3State == LOW &&
-  //             button4State == LOW &&
-  //             button5State == LOW &&
-  //             button6State == LOW &&
-  //             button7State == LOW &&
-  //             button8State == LOW ) {
-  //
-  //    turnOff();
-  //  }
-  //  colorWipe(strip.Color(255, 0, 0), 50); // Red
-  //  colorWipe(strip.Color(0, 255, 0), 50); // Green
-  //  colorWipe(strip.Color(0, 0, 255), 50); // Blue
-  ////colorWipe(strip.Color(0, 0, 0, 255), 50); // White RGBW
-  //  // Send a theater pixel chase in...
-  //  theaterChase(strip.Color(127, 127, 127), 50); // White
-  //  theaterChase(strip.Color(127, 0, 0), 50); // Red
-  //  theaterChase(strip.Color(0, 0, 127), 50); // Blue
-  //
-  //  rainbow(20);
-  //  rainbowCycle(20);
-  //  theaterChaseRainbow(50);
+    turnOff();
+  }
 }
-
 // Fill the dots one after the other with a color
-void colorWipe(uint32_t c, uint8_t wait) {
+void colorWipe(uint32_t c) {
   for (uint16_t i = 0; i < strip.numPixels(); i++) {
     strip.setPixelColor(i, c);
-    // delay(wait);
   }
 
   strip.show();
 }
 void turnOff() {
-  //if (flagOff == 0) {
   Serial.println("off");
-  colorWipe(strip.Color(0, 0, 0), 50);
-  strip.show();
+  colorWipe(strip.Color(0, 0, 0));
 }
-void lightItUp() {
-  Serial.println("red");
-  colorWipe(strip.Color(255, 0, 0), 50); // Red
-
-
-}
-
-
-void lightItUp2() {
-  Serial.println("blue");
-  colorWipe(strip.Color(0, 0, 255), 50); // Blue
-}
-void rainbow(uint8_t wait) {
-  uint16_t i, j;
-
-  for (j = 0; j < 256; j++) {
-    for (i = 0; i < strip.numPixels(); i++) {
-      strip.setPixelColor(i, Wheel((i + j) & 255));
-    }
-    strip.show();
-    delay(wait);
+void lightItUp(int i) {
+  Serial.println("lightitUP");
+  switch (i) {
+    case 0:
+      colorWipe(strip.Color(255, 0, 0));
+      break;
+    case 1:
+      colorWipe(strip.Color(0, 255, 0));
+      break;
+    case 2:
+      colorWipe(strip.Color(0, 0, 255));
+      break;
+    case 3:
+      colorWipe(strip.Color(255, 255, 0));
+      break;
+    case 4:
+      colorWipe(strip.Color(0, 255 , 255));
+      break;
+    case 5:
+      colorWipe(strip.Color(255, 0, 255));
+      break;
+    case 6:
+      colorWipe(strip.Color(255, 255, 255));
+      break;
+    default:
+      colorWipe(strip.Color(125, 125, 125));
+      break;
   }
+
+
 }
 
-// Slightly different, this makes the rainbow equally distributed throughout
-void rainbowCycle(uint8_t wait) {
-  uint16_t i, j;
 
-  for (j = 0; j < 256 * 5; j++) { // 5 cycles of all colors on wheel
-    for (i = 0; i < strip.numPixels(); i++) {
-      strip.setPixelColor(i, Wheel(((i * 256 / strip.numPixels()) + j) & 255));
-    }
-    strip.show();
-    delay(wait);
-  }
-}
 
-//Theatre-style crawling lights.
-void theaterChase(uint32_t c, uint8_t wait) {
-  for (int j = 0; j < 10; j++) { //do 10 cycles of chasing
-    for (int q = 0; q < 3; q++) {
-      for (uint16_t i = 0; i < strip.numPixels(); i = i + 3) {
-        strip.setPixelColor(i + q, c);  //turn every third pixel on
-      }
-      strip.show();
-
-      delay(wait);
-
-      for (uint16_t i = 0; i < strip.numPixels(); i = i + 3) {
-        strip.setPixelColor(i + q, 0);      //turn every third pixel off
-      }
-    }
-  }
-}
-
-//Theatre-style crawling lights with rainbow effect
-void theaterChaseRainbow(uint8_t wait) {
-  for (int j = 0; j < 256; j++) {   // cycle all 256 colors in the wheel
-    for (int q = 0; q < 3; q++) {
-      for (uint16_t i = 0; i < strip.numPixels(); i = i + 3) {
-        strip.setPixelColor(i + q, Wheel( (i + j) % 255)); //turn every third pixel on
-      }
-      strip.show();
-
-      delay(wait);
-
-      for (uint16_t i = 0; i < strip.numPixels(); i = i + 3) {
-        strip.setPixelColor(i + q, 0);      //turn every third pixel off
-      }
-    }
-  }
-}
-
-// Input a value 0 to 255 to get a color value.
-// The colours are a transition r - g - b - back to r.
-uint32_t Wheel(byte WheelPos) {
-  WheelPos = 255 - WheelPos;
-  if (WheelPos < 85) {
-    return strip.Color(255 - WheelPos * 3, 0, WheelPos * 3);
-  }
-  if (WheelPos < 170) {
-    WheelPos -= 85;
-    return strip.Color(0, WheelPos * 3, 255 - WheelPos * 3);
-  }
-  WheelPos -= 170;
-  return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
-}
+//  void rainbow(uint8_t wait) {
+//    uint16_t i, j;
+//
+//    for (j = 0; j < 256; j++) {
+//      for (i = 0; i < strip.numPixels(); i++) {
+//        strip.setPixelColor(i, Wheel((i + j) & 255));
+//      }
+//      strip.show();
+//      delay(wait);
+//    }
+//  }
+//
+//  // Slightly different, this makes the rainbow equally distributed throughout
+//  void rainbowCycle(uint8_t wait) {
+//    uint16_t i, j;
+//
+//    for (j = 0; j < 256 * 5; j++) { // 5 cycles of all colors on wheel
+//      for (i = 0; i < strip.numPixels(); i++) {
+//        strip.setPixelColor(i, Wheel(((i * 256 / strip.numPixels()) + j) & 255));
+//      }
+//      strip.show();
+//      delay(wait);
+//    }
+//  }
+//
+//  //Theatre-style crawling lights.
+//  void theaterChase(uint32_t c, uint8_t wait) {
+//    for (int j = 0; j < 10; j++) { //do 10 cycles of chasing
+//      for (int q = 0; q < 3; q++) {
+//        for (uint16_t i = 0; i < strip.numPixels(); i = i + 3) {
+//          strip.setPixelColor(i + q, c);  //turn every third pixel on
+//        }
+//        strip.show();
+//
+//        delay(wait);
+//
+//        for (uint16_t i = 0; i < strip.numPixels(); i = i + 3) {
+//          strip.setPixelColor(i + q, 0);      //turn every third pixel off
+//        }
+//      }
+//    }
+//  }
+//
+//  //Theatre-style crawling lights with rainbow effect
+//  void theaterChaseRainbow(uint8_t wait) {
+//    for (int j = 0; j < 256; j++) {   // cycle all 256 colors in the wheel
+//      for (int q = 0; q < 3; q++) {
+//        for (uint16_t i = 0; i < strip.numPixels(); i = i + 3) {
+//          strip.setPixelColor(i + q, Wheel( (i + j) % 255)); //turn every third pixel on
+//        }
+//        strip.show();
+//
+//        delay(wait);
+//
+//        for (uint16_t i = 0; i < strip.numPixels(); i = i + 3) {
+//          strip.setPixelColor(i + q, 0);      //turn every third pixel off
+//        }
+//      }
+//    }
+//  }
+//
+//  // Input a value 0 to 255 to get a color value.
+//  // The colours are a transition r - g - b - back to r.
+//  uint32_t Wheel(byte WheelPos) {
+//    WheelPos = 255 - WheelPos;
+//    if (WheelPos < 85) {
+//      return strip.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+//    }
+//    if (WheelPos < 170) {
+//      WheelPos -= 85;
+//      return strip.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+//    }
+//    WheelPos -= 170;
+//    return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+//  }
