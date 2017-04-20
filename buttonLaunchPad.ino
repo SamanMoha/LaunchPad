@@ -43,17 +43,6 @@ void setup() {
     pinMode(buttonPin[i], INPUT_PULLUP);
     Serial.println(i);
   }
-  //  pinMode(button1Pin, INPUT_PULLUP);
-  //  pinMode(button2Pin, INPUT_PULLUP);
-  //  pinMode(button3Pin, INPUT_PULLUP);
-  //  pinMode(button4Pin, INPUT_PULLUP);
-  //  pinMode(button5Pin, INPUT_PULLUP);
-  //  pinMode(button6Pin, INPUT_PULLUP);
-  //  pinMode(button7Pin, INPUT_PULLUP);
-  //  pinMode(button8Pin, INPUT_PULLUP);
-
-  // End of trinket special code
-
   Serial.println();
   Serial.println("Launchpad...");
   Serial.printf("%d low \n", LOW);
@@ -96,7 +85,7 @@ void turnOff() {
   colorWipe(strip.Color(0, 0, 0));
 }
 void lightItUp(int i) {
-  Serial.println("lightitUP");
+  Serial.println("lightitUP" + i);
   switch (i) {
     case 0:
       colorWipe(strip.Color(255, 0, 0));
