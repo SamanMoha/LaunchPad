@@ -83,3 +83,7 @@ When you connect on an the launchPad interface a default music is played.
 To light up your leds, you just have to click on keyboard controls 1 through 8.
 By clicking on these keyboard controls you also change both leds colors and music displayed.
 You only can read your music while the keyboard is down.
+
+## Presentation
+
+This is our presentation slide : https://docs.google.com/presentation/d/1jb-2zaVCw5mvC6XqpqJ5RJr4trS60nHvG-f9CGTgbpo/edit?usp=sharing
