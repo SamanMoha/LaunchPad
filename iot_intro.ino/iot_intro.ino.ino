@@ -170,6 +170,21 @@ void loop() {
       lightItUp(i);
     }
   }
+  if (buttonState[0] == HIGH &&
+      buttonState[1] == HIGH &&
+      buttonState[2] == HIGH &&
+      buttonState[3] == HIGH &&
+      buttonState[4] == HIGH &&
+      buttonState[5] == HIGH &&
+      buttonState[6] == HIGH &&
+      buttonState[7] == HIGH ) {
+
+    turnOff();
+  }
+}
+
+void turnOff() {
+  strip.show();
 }
 
 void lightItUp(int i) {
