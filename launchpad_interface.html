@@ -238,6 +238,32 @@
         }
 
         $(document).ready(function() {
+
+if(window.location.href.indexOf("red") > -1) {
+       playSound(audio1);
+    }
+ else if(window.location.href.indexOf("blue") > -1) {
+       playSound(audio2);
+    }
+    else if(window.location.href.indexOf("green") > -1) {
+       playSound(audio3);
+    }
+    else if(window.location.href.indexOf("blue") > -1) {
+       playSound(audio4);
+    }
+    else if(window.location.href.indexOf("white") > -1) {
+       playSound(audio5);
+    }
+    else if(window.location.href.indexOf("pink") > -1) {
+       playSound(audio6);
+    }
+    else if(window.location.href.indexOf("purple") > -1) {
+       playSound(audio7);
+    }
+    else if(window.location.href.indexOf("brown") > -1) {
+       playSound(audio8);
+    }
+
     $(document).bind('keydown',function(e){
 
        if(e.keyCode == 49) {
