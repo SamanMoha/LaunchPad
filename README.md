@@ -11,6 +11,7 @@ A simple LaunchPad with an Arduino (Wemos D1 mini) , 8 buttons , 8 LED ws2812 an
     - [State of the art](#state-of-the-art)
     - [What we want to do](#what-we-want-to-do)
     - [The interface role](#the-interface-role)
+    - [Playing sound](#playing sound)
 
 ### Setup environment
 If you don't have arduino
@@ -78,7 +79,7 @@ We were unable to properly transfer the desired data.
 ## Playing sound
 
 The HTML interface also allows users to play diffenrent music tracks.
-When you connect on an the launchPad interface a default music is played. 
+When you connect on an the launchPad interface a default music is played.
 To light up your leds, you just have to click on keyboard controls 1 through 8.
 By clicking on these keyboard controls you also change both leds colors and music displayed.
 You only can read your music while the keyboard is down.
