@@ -33,10 +33,22 @@ Start Arduino IDE
 
 ![SCHEMA](https://image.noelshack.com/fichiers/2017/16/1492765737-sketch.png)
 
-#### Modify the HTML
+### Modify the HTML
 
 if you modify the html file, you should run the minify script to update the interfaceHTML.h
+
     ./minify.sh
 
 INFORMATION: You need to install `html-minifier` before
-    npm install html-minifier -g
+
+npm install html-minifier -g
+
+## State of the art
+
+The LaunchPad is a tool for music proposed by Novation (coast 150€)
+
+![SCHEMA](http://s3.amazonaws.com/factmag-images/wp-content/uploads/2015/09/launchpad-pro-featured-616x440.jpg)
+
+## What we want to do
+
+![SCHEMA](http://image.noelshack.com/fichiers/2017/16/1492780251-capture-d-ecran-2017-04-21-a-15-10-38.png)
