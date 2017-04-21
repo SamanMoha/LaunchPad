@@ -63,6 +63,10 @@ The LaunchPad is a tool for music proposed by Novation (coast 150€)
 
 ![SCHEMA](http://image.noelshack.com/fichiers/2017/16/1492780251-capture-d-ecran-2017-04-21-a-15-10-38.png)
 
+We encountered a small problem, so we only have one LED line.
+
+The problem arises from the fact that the arduino does not emit enough voltage to combine more than a line of LED
+
 ## The interface role
 
 The HTML interface allows the user to configure his launchPad. That means, the user can choose which LEDs to light according to each button. When choosing the LED, the user can also configure the color of the LED.
