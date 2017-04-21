@@ -215,23 +215,6 @@
             modal.style.display = 'none';
         }
 
-        function selectLed(id) {
-            selectedLed = id;
-            tab[selectedButton]['led'].push(id); // send the selected LED id to the selected button led table.
-            ledTab[id]['on'] = true; // on peut selectionner une LED plusieurs fois, donc ne sert à rien. trouver autre solution pour changer le O to X
-            modal.style.display = 'block'; // display block to choose color
-        }
-
-        function colorActive(id, nb) {
-            //selectedButton = document.getElementsByClassName('active');
-            //$(e).removeClass('active');
-            //.removeClass('active');
-            //var t = document.getElementById(selectedButton);
-            //t.removeClass('active');
-            selectedButton = nb; // update selectedButton
-            var d = document.getElementById(id.id);
-            d.className += ' active'; // add class active to the selected new button
-        }
         var s1 = document.getElementById("audio1"),
             s2 = document.getElementById("audio2"),
             s3 = document.getElementById("audio3"),
