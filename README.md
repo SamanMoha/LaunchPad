@@ -41,7 +41,7 @@ if you modify the html file, you should run the minify script to update the inte
 
 INFORMATION: You need to install `html-minifier` before
 
-npm install html-minifier -g
+    npm install html-minifier -g
 
 ## State of the art
 
@@ -52,3 +52,11 @@ The LaunchPad is a tool for music proposed by Novation (coast 150€)
 ## What we want to do
 
 ![SCHEMA](http://image.noelshack.com/fichiers/2017/16/1492780251-capture-d-ecran-2017-04-21-a-15-10-38.png)
+
+## The interface role
+
+The HTML interface allows the user to configure his launchPad. That means, the user can choose which LEDs to light according to each button. When choosing the LED, the user can also configure the color of the LED.
+
+Currently we have encountered some problems concerning the interface, due to lack of time.
+
+We were unable to properly transfer the desired data.
