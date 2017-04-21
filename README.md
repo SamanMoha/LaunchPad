@@ -2,6 +2,16 @@
 
 A simple LaunchPad with an Arduino (Wemos D1 mini) , 8 buttons , 8 LED ws2812 and one resistor .
 
+- [LaunchPad](#launchPad)
+    - [Setup environment](#setup-environment)
+        - [Setup the board](#setup-the-board)
+        - [Add external libraries](#add-external-libraries)
+        - [Scheme](#scheme)
+    - [Modify the HTML](#modify-the-HTML)
+    - [State of the art](#state-of-the-art)
+    - [What we want to do](#what-we-want-to-do)
+    - [The interface role](#the-interface-role)
+
 ### Setup environment
 If you don't have arduino
   1. download it here: https://www.arduino.cc/en/main/software
