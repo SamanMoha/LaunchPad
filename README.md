@@ -31,5 +31,5 @@ Start Arduino IDE
 3. Now your board is setup :)
 (nb : the D4 Pin is linked to the internal LED on the Wemos D1 mini , so when you will press this button the LED will light up)
 
-![SCHEMA](https://www.noelshack.com/2017-16-1492765737-sketch.png)
-![SCHEMA](https://www.noelshack.com/2017-16-1492765751-dsc-0393.jpg)
+![SCHEMA](https://image.noelshack.com/fichiers/2017-16-1492765737-sketch.png)
+![SCHEMA](https://image.noelshack.com/fichiers/2017/16/1492765751-dsc-0393.jpg)
