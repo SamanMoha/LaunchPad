@@ -30,3 +30,6 @@ Start Arduino IDE
 2. Then link your LED (to the Pin D0 if your are on the Wemos D1 mini) and to the 5V output .
 3. Now your board is setup :)
 (nb : the D4 Pin is linked to the internal LED on the Wemos D1 mini , so when you will press this button the LED will light up)
+
+![SCHEMA](https://www.noelshack.com/2017-16-1492765737-sketch.png)
+![SCHEMA](https://www.noelshack.com/2017-16-1492765751-dsc-0393.jpg)
