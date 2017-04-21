@@ -234,22 +234,65 @@
         function stopPlayingSound(soundToStop) {
             soundToStop.pause();
         }
-        b1.onmousedown = function () { playSound(audio1) };
-        b2.onmousedown = function () { playSound(audio2) };
-        b3.onmousedown = function () { playSound(audio3) };
-        b4.onmousedown = function () { playSound(audio4) };
-        b5.onmousedown = function () { playSound(audio5) };
-        b6.onmousedown = function () { playSound(audio3) };
-        b7.onmousedown = function () { playSound(audio4) };
-        b8.onmousedown = function () { playSound(audio5) };
-        b1.onmouseup = function () { stopPlayingSound(audio1) };
-        b2.onmouseup = function () { stopPlayingSound(audio2) };
-        b3.onmouseup = function () { stopPlayingSound(audio3) };
-        b4.onmouseup = function () { stopPlayingSound(audio4) };
-        b5.onmouseup = function () { stopPlayingSound(audio5) };
-        b6.onmouseup = function () { stopPlayingSound(audio3) };
-        b7.onmouseup = function () { stopPlayingSound(audio4) };
-        b8.onmouseup = function () { stopPlayingSound(audio5) };
+
+        $(document).ready(function() {
+    $(document).bind('keydown',function(e){
+       
+       if(e.keyCode == 49) {
+          playSound(audio1);
+       }
+       else if(e.keyCode == 50) {
+          playSound(audio2);
+       }
+       else if(e.keyCode == 51) {
+          playSound(audio3);
+       }
+       else if(e.keyCode == 52) {
+          playSound(audio4);
+       }
+       else if(e.keyCode == 53) {
+          playSound(audio5);
+       }
+       else if(e.keyCode == 54) {
+          playSound(audio6);
+       }
+       else if(e.keyCode == 55) {
+          playSound(audio7);
+       }
+       else if(e.keyCode == 56) {
+          playSound(audio8);
+       }
+
+    });
+    $(document).bind('keyup',function(e){
+       if(e.keyCode == 49) {
+          stopPlayingSound(audio1);
+       }
+       else if(e.keyCode == 50) {
+          stopPlayingSound(audio2);
+       }
+       else if(e.keyCode == 51) {
+          stopPlayingSound(audio3);
+       }
+       else if(e.keyCode == 52) {
+          stopPlayingSound(audio4);
+       }
+       else if(e.keyCode == 53) {
+          stopPlayingSound(audio5);
+       }
+       else if(e.keyCode == 54) {
+          stopPlayingSound(audio6);
+       }
+       else if(e.keyCode == 55) {
+          stopPlayingSound(audio7);
+       }
+       else if(e.keyCode == 56) {
+          stopPlayingSound(audio8);
+       }
+
+    });
+});
+
     </script>
 </body>
 </html>
