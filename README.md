@@ -1,6 +1,6 @@
 # LaunchPad
 
-A simple LaunchPad with an Arduino (Wemos D1 mini) , 8 buttons , 8 LED ws2812 and one  resistor .
+A simple LaunchPad with an Arduino (Wemos D1 mini) , 8 buttons , 8 LED ws2812 and one resistor .
 
 ### Setup environment
 If you don't have arduino
@@ -32,4 +32,3 @@ Start Arduino IDE
 (nb : the D4 Pin is linked to the internal LED on the Wemos D1 mini , so when you will press this button the LED will light up)
 
 ![SCHEMA](https://image.noelshack.com/fichiers/2017/16/1492765737-sketch.png)
-![SCHEMA](https://image.noelshack.com/fichiers/2017/16/1492765751-dsc-0393.jpg)
