@@ -73,6 +73,9 @@
         .test {
             margin: 30px;
         }
+        .selected {
+
+        }
         body{
                 margin-top: 20%;
         }
@@ -94,24 +97,56 @@
         <form>
             <table>
                 <tr>
-                    <td><span id='l1' class='hand' onclick='selectLed(0)' name='toggle' value='1'>O</span></td>
-                    <td><span id='l2' class='hand' onclick='selectLed(1)' name='toggle' value='2'>O</span></td>
-                    <td><span id='l3' class='hand' onclick='selectLed(2)' name='toggle' value='3'>O</span></td>
-                    <td><span id='l4' class='hand' onclick='selectLed(3)' name='toggle' value='4'>O</span></td>
-                    <td><span id='l5' class='hand' onclick='selectLed(4)' name='toggle' value='5'>O</span></td>
-                    <td><span id='l6' class='hand' onclick='selectLed(5)' name='toggle' value='6'>O</span></td>
-                    <td><span id='l7' class='hand' onclick='selectLed(6)' name='toggle' value='7'>O</span></td>
-                    <td><span id='l8' class='hand' onclick='selectLed(7)' name='toggle' value='8'>O</span></td>
+                    <td><span id='l1' class='hand' name='toggle' value='1'>O</span></td>
+                    <td><span id='l2' class='hand' name='toggle' value='2'>O</span></td>
+                    <td><span id='l3' class='hand' name='toggle' value='3'>O</span></td>
+                    <td><span id='l4' class='hand' name='toggle' value='4'>O</span></td>
+                    <td><span id='l5' class='hand' name='toggle' value='5'>O</span></td>
+                    <td><span id='l6' class='hand' name='toggle' value='6'>O</span></td>
+                    <td><span id='l7' class='hand' name='toggle' value='7'>O</span></td>
+                    <td><span id='l8' class='hand' name='toggle' value='8'>O</span></td>
                 </tr>
                 <tr>
-                    <td><span id='b1' class='myButton hand active' onclick='colorActive(b1, O)'>1</span></td>
-                    <td><span id='b2' class='myButton hand' onclick='colorActive(b2, 1)'>2</span></td>
-                    <td><span id='b3' class='myButton hand' onclick='colorActive(b3, 2)'>3</span></td>
-                    <td><span id='b4' class='myButton hand' onclick='colorActive(b4, 3)'>4</span></td>
-                    <td><span id='b5' class='myButton hand' onclick='colorActive(b5, 4)'>5</span></td>
-                    <td><span id='b6' class='myButton hand' onclick='colorActive(b6, 5)'>6</span></td>
-                    <td><span id='b7' class='myButton hand' onclick='colorActive(b7, 6)'>7</span></td>
-                    <td><span id='b8' class='myButton hand' onclick='colorActive(b8, 7)'>8</span></td>
+                    <td>
+                        <form method="post" action="/redled" class="form">
+                            <input type='submit' value='1' />
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="/blueled" class="form">
+                            <input type='submit' value='2' />
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="/greenled" class="form">
+                            <input type='submit' value='3' />
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="/yellowled" class="form">
+                            <input type='submit' value='4' />
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="/purpleled" class="form">
+                            <input type='submit' value='5' />
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="/whiteled" class="form">
+                            <input type='submit' value='6' />
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="/pinkled" class="form">
+                            <input type='submit' value='7' />
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="/brownled" class="form">
+                            <input type='submit' value='8' />
+                        </form>
+                    </td>
                 </tr>
             </table>
         </form>
@@ -127,11 +162,13 @@
                     <span class='color-cadre' style='background-color: indianred'> Red </span><br>
                 <input type='radio' name='color' value='green' class='test'>
                     <span class='color-cadre' style='background-color: forestgreen'> Green </span>
-                <br><button type="submit" form="form1" value="Submit">Submit</button>
+                <br><input type='button' onclick='sendColor()' value='submit' />
             </form>
           </div>
         </div>
     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
     <script type='text/javascript'>
         var tab = [{id: 'b1', led: []},
             {id: 'b2', led: []},
@@ -151,6 +188,8 @@
             {id: 'l8', on: false}];
         var modal = document.getElementById('myModal');
         var span = document.getElementsByClassName('close')[0];
+        var selectedButton = 0;
+        var selectedLed = 0;
 
         span.onclick = function() {
             modal.style.display = 'none';
@@ -162,7 +201,17 @@
             }
         }
 
+        function sendColor() {
+            var radio = $('input[name=color]:checked').val();
+            var http = new XMLHttpRequest();
+            console.log('http://' + window.location +'/set/color?color=' + radio + '&button='+selectedButton+'&led='+selectedLed);
+            http.open('GET', '/set/color?color=' + radio + '&button='+selectedButton+'&led='+selectedLed , false);
+            http.send( null );
+            modal.style.display = 'none';
+        }
+
         function selectLed(id) {
+            selectedLed = id;
             tab[selectedButton]['led'].push(id); // send the selected LED id to the selected button led table.
             ledTab[id]['on'] = true; // on peut selectionner une LED plusieurs fois, donc ne sert à rien. trouver autre solution pour changer le O to X
             modal.style.display = 'block'; // display block to choose color
