@@ -57,9 +57,29 @@ void colorWipe(uint32_t c) {
   server.send(200, "text/html", handleRootHTML);
 }
 void shineRed(){
-  
+  colorWipe(strip.Color(255, 0, 0));
 }
-
+void shineBlue(){
+  colorWipe(strip.Color(0, 0, 255));
+}
+void shineGreen(){
+  colorWipe(strip.Color(0, 255, 0));
+}
+void shineYellow(){
+ colorWipe(strip.Color(255, 255, 0));
+}
+void shineWhite(){
+ colorWipe(strip.Color(255, 255, 255));
+}
+void shineBrown(){
+  colorWipe(strip.Color(142, 80, 0));
+}
+void shinePink(){
+  colorWipe(strip.Color(225, 122, 230));
+}
+void shinePurple(){
+   colorWipe(strip.Color(120, 16, 125));
+}
 /****Setups****/
 
 //gets called when WiFiManager enters configuration mode
@@ -89,14 +109,14 @@ void setupWifi() {
 
 void setupServer() {
   server.on("/", handleRoot);
-  server.on("/redled", colorWipe,strip.Color(255, 0, 0));
-  server.on("/blueled", colorWipe(strip.Color(0, 0, 255)));
-  server.on("/greenled", colorWipe(strip.Color(0, 255, 0)));
-  server.on("/yellowled", colorWipe(strip.Color(255, 255, 0)));
-  server.on("/pinkled", colorWipe(strip.Color(225, 122, 230)));
-  server.on("/purpleled", colorWipe(strip.Color(120, 16, 125)));
-  server.on("/whiteled", colorWipe(strip.Color(255, 255, 255)));
-  server.on("/brownled", shine());
+  server.on("/redled", shineRed);
+  server.on("/blueled", shineBlue);
+  server.on("/greenled", shineGreen);
+  server.on("/yellowled", shineYellow);
+  server.on("/pinkled", shinePink);
+  server.on("/purpleled", shinePurple);
+  server.on("/whiteled", shineWhite);
+  server.on("/brownled", shineBrown);
   server.begin();
   Serial.println("HTTP server started");
 }
@@ -144,8 +164,45 @@ void setup() {
 /****Loop****/
 void loop() {
   server.handleClient();
+  for (int i = 0; i < SIZE ; i++) {
+    buttonState[i] = digitalRead(buttonPin[i]);
+    if (buttonState[i] == LOW) {
+      lightItUp(i);
+    }
+  }
 }
 
+void lightItUp(int i) {
+  Serial.println("lightitUP" + i);
+  switch (i) {
+    case 0:
+      colorWipe(strip.Color(255, 0, 0));
+      break;
+    case 1:
+      colorWipe(strip.Color(0, 255, 0));
+      break;
+    case 2:
+      colorWipe(strip.Color(0, 0, 255));
+      break;
+    case 3:
+      colorWipe(strip.Color(255, 255, 0));
+      break;
+    case 4:
+      colorWipe(strip.Color(0, 255 , 255));
+      break;
+    case 5:
+      colorWipe(strip.Color(255, 0, 255));
+      break;
+    case 6:
+      colorWipe(strip.Color(255, 255, 255));
+      break;
+    default:
+      colorWipe(strip.Color(125, 125, 125));
+      break;
+  }
+
+
+}
 /****LEDs****/
 bool RGBstates[3];
 const float RGBintensities[] = {0xFF, 0xFF * 0.3, 0xFF * 0.6};
