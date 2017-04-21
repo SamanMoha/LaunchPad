@@ -11,7 +11,7 @@ A simple LaunchPad with an Arduino (Wemos D1 mini) , 8 buttons , 8 LED ws2812 an
     - [State of the art](#state-of-the-art)
     - [What we want to do](#what-we-want-to-do)
     - [The interface role](#the-interface-role)
-    - [Playing sound](#playing sound)
+    - [Playing sound](#playing-sound)
 
 ### Setup environment
 If you don't have arduino
