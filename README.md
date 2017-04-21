@@ -32,3 +32,11 @@ Start Arduino IDE
 (nb : the D4 Pin is linked to the internal LED on the Wemos D1 mini , so when you will press this button the LED will light up)
 
 ![SCHEMA](https://image.noelshack.com/fichiers/2017/16/1492765737-sketch.png)
+
+#### Modify the HTML
+
+if you modify the html file, you should run the minify script to update the interfaceHTML.h
+    ./minify.sh
+
+INFORMATION: You need to install `html-minifier` before
+    npm install html-minifier -g
