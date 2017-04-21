@@ -21,9 +21,6 @@ int buttonPin[SIZE] = {D0, D1, D2, D3, D4, D5, D6, D7};
 
 int buttonState[SIZE] = {0, 0, 0, 0, 0, 0, 0, 0};
 
-typedef enum color_e {RED, GREEN, BLUE, YELLOW, OFF} color_t;
-const int RGBpins[] = {D8, D6, D7};
-const int debugLEDpin = D4;
 
 /*****Initialization*****/
 ESP8266WebServer server(80);
@@ -35,12 +32,10 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(8, PIN, NEO_GRB + NEO_KHZ800);
 // Warning: only use simple quotes in the html (no double)
 extern String handleRootHTML;
 String getHTML() {
-  digitalWrite(debugLEDpin, LOW);  // (inverted logic)
 
   String updatedRootHTML = handleRootHTML;
   //updatedRootHTML.replace("xxx", myId);
 
-  digitalWrite(debugLEDpin, HIGH); // (inverted logic)
   return updatedRootHTML;
 }
 
@@ -56,35 +51,29 @@ void colorWipe(uint32_t c) {
   strip.show();
   server.send(200, "text/html", handleRootHTML);
 }
-void shineRed(){
-  colorWipe(strip.Color(255, 0, 0));
+void shineRed() {
+      lightItUp(0);
 }
-void shineBlue(){
-  colorWipe(strip.Color(0, 0, 255));
+void shineBlue() {
+      lightItUp(1);
 }
-void shineGreen(){
-  colorWipe(strip.Color(0, 255, 0));
+void shineGreen() {
+      lightItUp(2);
 }
-void shineYellow(){
- colorWipe(strip.Color(255, 255, 0));
+void shineYellow() {
+      lightItUp(3);
 }
-void shineWhite(){
- colorWipe(strip.Color(255, 255, 255));
+void shinePink() {
+      lightItUp(4);
 }
-void shineBrown(){
-  colorWipe(strip.Color(142, 80, 0));
+void shinePurple() {
+      lightItUp(5);
 }
-void shinePink(){
-  colorWipe(strip.Color(225, 122, 230));
+void shineWhite() {
+      lightItUp(6);
 }
-void shinePurple(){
-   colorWipe(strip.Color(120, 16, 125));
-}
-/****Setups****/
-
-//gets called when WiFiManager enters configuration mode
-void configModeCallback(WiFiManager *myWiFiManager) {
-  LEDfeedback(RED); // waiting for connection
+void shineBrown() {
+      lightItUp(7);
 }
 
 void setupWifi() {
@@ -94,8 +83,6 @@ void setupWifi() {
   //reset saved settings -- Flush flash
   //wifiManager.resetSettings();
 
-  //set callback that gets called when connecting to previous WiFi fails, and enters Access Point mode
-  wifiManager.setAPCallback(configModeCallback);
 
   //fetches ssid and pass from eeprom and tries to connect
   //if it does not connect it starts an access point with the specified name
@@ -137,33 +124,26 @@ void setup() {
   if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
 #endif
 
-  pinMode(debugLEDpin, OUTPUT);
-  digitalWrite(debugLEDpin, HIGH);  // (inverted logic)
-
-  for (int i = 0; i < 3; i++)
-    pinMode(RGBpins[i], OUTPUT);
 
   Serial.begin(115200);
 
-  Serial.println("Starting LEDs.");
-  LEDfeedback(YELLOW); // state feedback
+  for (int i = 0; i < SIZE ; i++) {
+    pinMode(buttonPin[i], INPUT_PULLUP);
+  }
 
   Serial.println("Starting WiFi.");
   setupWifi();
   setupServer();
   setupMDNS();
-  
+
   strip.begin();
   strip.show();
 
-  Serial.println("Setup OK.");
-  LEDfeedback(OFF); // ready
-  digitalWrite(debugLEDpin, LOW);  // (inverted logic)
+  Serial.println("Setup OK.");  // (inverted logic)
 }
 
 /****Loop****/
 void loop() {
-  server.handleClient();
   for (int i = 0; i < SIZE ; i++) {
     buttonState[i] = digitalRead(buttonPin[i]);
     if (buttonState[i] == LOW) {
@@ -181,10 +161,12 @@ void loop() {
 
     turnOff();
   }
+  server.handleClient();
 }
 
 void turnOff() {
-  strip.show();
+  Serial.println("turnoff");
+  colorWipe(strip.Color(0, 0, 0));
 }
 
 void lightItUp(int i) {
@@ -194,59 +176,28 @@ void lightItUp(int i) {
       colorWipe(strip.Color(255, 0, 0));
       break;
     case 1:
-      colorWipe(strip.Color(0, 255, 0));
+      colorWipe(strip.Color(0, 0, 255));
       break;
     case 2:
-      colorWipe(strip.Color(0, 0, 255));
+      colorWipe(strip.Color(0, 255, 0));
       break;
     case 3:
       colorWipe(strip.Color(255, 255, 0));
       break;
     case 4:
-      colorWipe(strip.Color(0, 255 , 255));
+      colorWipe(strip.Color(225, 122, 230));
       break;
     case 5:
-      colorWipe(strip.Color(255, 0, 255));
+      colorWipe(strip.Color(120, 16, 125));
       break;
     case 6:
       colorWipe(strip.Color(255, 255, 255));
       break;
     default:
-      colorWipe(strip.Color(125, 125, 125));
+      colorWipe(strip.Color(142, 80, 0));
       break;
   }
 
 
 }
-/****LEDs****/
-bool RGBstates[3];
-const float RGBintensities[] = {0xFF, 0xFF * 0.3, 0xFF * 0.6};
 
-void LEDtoggle(char color) {
-  int i = 0;
-  switch (color) {
-    case 'R' : i = 0; break;
-    case 'G' : i = 1; break;
-    case 'B' : i = 2; break;
-    default:
-      Serial.print("LEDtoggle() switch failed!");
-      return;
-  }
-  RGBstates[i] ^= 1; // toggle
-  analogWrite(RGBpins[i], RGBstates[i]*RGBintensities[i]);
-}
-
-void LEDfeedback(color_t color) {
-  switch (color) {
-    case RED :    RGBstates[0] = 1; RGBstates[1] = 0; RGBstates[2] = 0; break;
-    case GREEN :  RGBstates[0] = 0; RGBstates[1] = 1; RGBstates[2] = 0; break;
-    case BLUE :   RGBstates[0] = 0; RGBstates[1] = 0; RGBstates[2] = 1; break;
-    case YELLOW : RGBstates[0] = 1; RGBstates[1] = 1; RGBstates[2] = 0; break;
-    case OFF :    RGBstates[0] = 0; RGBstates[1] = 0; RGBstates[2] = 0; break;
-    default:
-      Serial.print("LEDfeedback() switch failed!");
-      return;
-  }
-  for (int i = 0; i < 3; i++)
-    analogWrite(RGBpins[i], RGBstates[i]*RGBintensities[i]);
-}

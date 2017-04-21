@@ -111,7 +111,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <form method="post" action="/" class="form" style="display: none;">
+                        <form id="red" method="post" action="/" class="form" style="display: none;">
                         </form>
                     </td>
                     <td>
@@ -241,6 +241,7 @@
 
 if(window.location.href.indexOf("red") > -1) {
        playSound(audio1);
+
     }
  else if(window.location.href.indexOf("blue") > -1) {
        playSound(audio2);
@@ -295,6 +296,8 @@ if(window.location.href.indexOf("red") > -1) {
     $(document).bind('keyup',function(e){
        if(e.keyCode == 49) {
           stopPlayingSound(audio1);
+          document.red.submit();
+
        }
        else if(e.keyCode == 50) {
           stopPlayingSound(audio2);
